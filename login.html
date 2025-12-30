@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RGUKT Sports Club</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; }
+        .login-container { max-width: 400px; margin: 60px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 30px; }
+        h2 { text-align: center; color: #1e2a78; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        .login-type { margin: 15px 0; }
+        .login-type label { font-weight: normal; margin-right: 20px; }
+        button { width: 100%; background: #1e2a78; color: #fff; border: none; padding: 12px; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #ff9800; }
+        .error { color: red; text-align: center; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <!-- Header Start -->
+    <div class="header">
+        <ul>
+            <li><a href="index.html" style="color:#ff9800;">Home</a></li>
+            <li>Live Scores</li>
+            <li>Teams</li>
+            <li>Schedule</li>
+            <li>News</li>
+            <li>Contact</li>
+            <li><a href="login.html" style="color:#ff9800;">Login</a></li>
+        </ul>
+    </div>
+    <!-- Header End -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <div class="login-type">
+                <label><input type="radio" name="type" value="admin" required> Admin</label>
+                <label><input type="radio" name="type" value="public" required> Public</label>
+            </div>
+            <button type="submit">Login</button>
+            <div class="error" id="error-msg"></div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const type = document.querySelector('input[name="type"]:checked');
+            const errorMsg = document.getElementById('error-msg');
+            if (!type) {
+                errorMsg.textContent = 'Please select login type.';
+                return;
+            }
+            // Demo validation
+            if (type.value === 'admin') {
+                if (email === 'admin@ipl.com' && password === 'admin123') {
+                    errorMsg.textContent = '';
+                    alert('Admin login successful!');
+                    // window.location.href = 'admin.html';
+                } else {
+                    errorMsg.textContent = 'Invalid admin credentials.';
+                }
+            } else {
+                if (email && password) {
+                    errorMsg.textContent = '';
+                    alert('Public login successful!');
+                    // window.location.href = 'public.html';
+                } else {
+                    errorMsg.textContent = 'Invalid public credentials.';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
